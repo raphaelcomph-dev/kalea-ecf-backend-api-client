@@ -1,8 +1,9 @@
-import { Column } from "typeorm";
+import { Column, Entity } from "typeorm";
 import { BaseModel } from "../../shared/models/base.model";
 
+@Entity("ProcessingFile")
 export class EcfFileModel extends BaseModel {
-    constructor(props: { id?: string; fileName: string; fileSize: string; fileBuffer: string }) {
+    constructor(props: { id?: string; fileName: string; fileSize: number; fileBuffer?: Buffer }) {
         super();
         Object.assign(this, props);
         if (props?.id) {
@@ -10,12 +11,12 @@ export class EcfFileModel extends BaseModel {
         }
     }
 
-    @Column()
+    @Column({ name: "FileName" })
     fileName: string;
 
-    @Column()
-    fileSize: string;
+    @Column({ name: "FileSize" })
+    fileSize: number;
 
-    @Column()
-    fileBuffer: string;
+    @Column({ name: "FileBuffer", nullable: true, type: "varbinary", length: "max" })
+    fileBuffer: Buffer;
 }

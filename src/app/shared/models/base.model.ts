@@ -1,6 +1,7 @@
-import { Column } from "typeorm";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
+@Entity()
 export abstract class BaseModel {
-    @Column()
+    @PrimaryGeneratedColumn()
     id: string;
 }

@@ -5,11 +5,5 @@ export class UploadEcfUsecase {
     private readonly logger = new Logger(UploadEcfUsecase.name);
     constructor() {}
 
-    async execute(file: Express.Multer.File) {
-        new EcfFileModel({
-            fileName: file.originalname,
-            fileSize: file.size.toString(),
-            fileBuffer: file.buffer.toString("base64"),
-        });
-    }
+    async execute(file: Express.Multer.File) {}
 }
