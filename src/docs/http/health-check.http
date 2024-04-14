@@ -1,0 +1,10 @@
+# Firebase PROD
+# @base_url = https://us-central1-doula-app-br.cloudfunctions.net/doula_app_backend_api_identity-prod
+# Firebase QA
+# @base_url = https://us-central1-doula-app-br.cloudfunctions.net/doula_app_backend_api_identity-qa
+# Local
+@base_url = http://localhost:6251
+
+GET {{base_url}}/api/health
+
+###

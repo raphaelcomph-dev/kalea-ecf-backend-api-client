@@ -1,13 +1,15 @@
 import { Module } from "@nestjs/common";
-import { AppController } from "./api/rest/app.controller";
 import { AppService } from "./services/app.service";
 import { EcfController } from "./api/rest/efc.controller";
 import { EcfService } from "./services/efc.service";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { EcfFileModel } from "./services/models/efc-file.model";
+import { HealthController } from "./api/rest/health.controller";
+import { TerminusModule } from "@nestjs/terminus";
 
 @Module({
     imports: [
+        TerminusModule,
         TypeOrmModule.forRoot({
             type: "mssql",
             host: "localhost",
@@ -23,7 +25,7 @@ import { EcfFileModel } from "./services/models/efc-file.model";
         }),
         TypeOrmModule.forFeature([EcfFileModel]),
     ],
-    controllers: [EcfController, AppController],
+    controllers: [EcfController, HealthController],
     providers: [EcfService, AppService],
 })
 export class AppModule {}
