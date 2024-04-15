@@ -13,7 +13,8 @@ export class UploadEcfUseCase {
     async execute(file: Express.Multer.File) {
         const processingInfo = new EcfFileProcessInfoModel({
             userId: ApiContext.getContext().userId,
-            state: 1,
+            state: 0,
+            type: 2,
             customerId: ApiContext.getContext().customerId,
             fileName: file.originalname,
             fileSize: file.size,

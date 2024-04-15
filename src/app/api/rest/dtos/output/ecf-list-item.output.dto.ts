@@ -1,7 +1,7 @@
 export class EcfListItemOutputDto {
     id: number;
     fileName: string;
-    fileDate: string;
+    fileDate: Date;
     cnpj: string;
-    status: string;
+    status: number;
 }

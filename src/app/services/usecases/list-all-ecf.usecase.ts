@@ -16,9 +16,9 @@ export class ListAllEcfUsecase {
                 return {
                     id: ecf.id,
                     fileName: ecf.fileName,
-                    fileDate: null,
-                    cnpj: null,
-                    status: "PROCESSING",
+                    fileDate: ecf.inProgressDate,
+                    cnpj: ecf.cnpj,
+                    status: ecf.status,
                 };
             });
         }
