@@ -27,8 +27,10 @@ export class ApiContext implements NestMiddleware {
             const token = req.headers.authorization.replace("Bearer ", "");
 
             const tokenDecoded = this.jwtService.decode(token);
-            ApiContext._customerId = tokenDecoded.customerId;
-            ApiContext._userId = tokenDecoded.sub;
+            if (tokenDecoded) {
+                ApiContext._customerId = tokenDecoded.customerId;
+                ApiContext._userId = tokenDecoded.sub;
+            }
         }
     }
 
