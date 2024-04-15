@@ -3,5 +3,5 @@ import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 @Entity()
 export abstract class BaseModel {
     @PrimaryGeneratedColumn()
-    id: string;
+    id: number;
 }

@@ -5,8 +5,14 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Run npm start debug",
+            "name": "Debug local",
             "command": "npm run start:local:debug",
+            "request": "launch",
+            "type": "node-terminal"
+        },
+        {
+            "name": "Debug QA",
+            "command": "npm run start:qa:debug",
             "request": "launch",
             "type": "node-terminal"
         }
