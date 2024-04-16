@@ -1,3 +1,4 @@
+import { BalanceIndicatorModel } from "./services/models/balance-indicator.model";
 import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { TerminusModule } from "@nestjs/terminus";
 import { TypeOrmModule } from "@nestjs/typeorm";
@@ -19,6 +20,8 @@ import { CustomerRepository } from "./services/infra/repositories/customer.repos
 import { CustomerModel } from "./services/models/customer.model";
 import { CustomerUserModel } from "./services/models/customer-user.model";
 import { ApiContext } from "./shared/api-context";
+import { BalanceRepository } from "./services/infra/repositories/balance.repository";
+import { CustomerBalanceModel } from "./services/models/customer-balance.model";
 
 @Module({
     imports: [
@@ -37,12 +40,28 @@ import { ApiContext } from "./shared/api-context";
                     options: {
                         encrypt: false, // MSSQL-specific option
                     },
-                    entities: [UserModel, CustomerModel, CustomerUserModel, EcfFileModel, EcfFileProcessInfoModel],
+                    entities: [
+                        BalanceIndicatorModel,
+                        CustomerBalanceModel,
+                        CustomerUserModel,
+                        CustomerModel,
+                        EcfFileProcessInfoModel,
+                        EcfFileModel,
+                        UserModel,
+                    ],
                 };
             },
         }),
 
-        TypeOrmModule.forFeature([UserModel, CustomerModel, CustomerUserModel, EcfFileModel, EcfFileProcessInfoModel]),
+        TypeOrmModule.forFeature([
+            BalanceIndicatorModel,
+            CustomerBalanceModel,
+            CustomerUserModel,
+            CustomerModel,
+            EcfFileProcessInfoModel,
+            EcfFileModel,
+            UserModel,
+        ]),
     ],
     controllers: [AuthController, EcfController, HealthController],
     providers: [
@@ -53,6 +72,7 @@ import { ApiContext } from "./shared/api-context";
         CustomerRepository,
         EcfFileRepository,
         EcfFileProcessInfoRepository,
+        BalanceRepository,
     ],
 })
 export class AppModule {

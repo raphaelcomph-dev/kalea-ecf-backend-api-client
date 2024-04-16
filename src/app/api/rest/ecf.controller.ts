@@ -1,7 +1,8 @@
-import { Controller, Get, Logger, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { Controller, Get, Logger, Param, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { EcfService } from "../../services/ecf.service";
 import { EcfListItemOutputDto } from "./dtos/output/ecf-list-item.output.dto";
+import { EcfIndicatorsOutputDto as EcfIndicatorsOutputDto } from "./dtos/output/ecf-indicators.output.dto";
 
 @Controller("ecf")
 export class EcfController {
@@ -9,11 +10,10 @@ export class EcfController {
 
     constructor(private readonly ecfService: EcfService) {}
 
-    // TODO: melhorar a extração do token e valida-lo
     @Post("upload")
     @UseInterceptors(FileInterceptor("file"))
     uploadFile(@UploadedFile() file: Express.Multer.File) {
-        this.logger.log(`recebendo requisição upload do ecf:`, file.filename, file.size, file.mimetype);
+        this.logger.log(`recebendo requisição upload do ecf: ${file.filename}, ${file.size}, ${file.mimetype}`);
         this.ecfService.uploadEcfFile(file);
     }
 
@@ -23,10 +23,10 @@ export class EcfController {
         return this.ecfService.findAll();
     }
 
-    @Get("indicators")
-    findEcfIndicators(): Promise<EcfListItemOutputDto[]> {
+    @Get("indicators/:fileInfoId")
+    findEcfIndicators(@Param("fileInfoId") fileInfoId: number): Promise<EcfIndicatorsOutputDto> {
         // TODO: Implementar esse método
-        this.logger.log(`recebendo requisição p/ buscar os indicadores do ecf`);
-        return this.ecfService.findAll();
+        this.logger.log(`recebendo requisição p/ buscar os indicadores do ecf: ${fileInfoId}`);
+        return this.ecfService.findIndicatorsByEcfInfoId(fileInfoId);
     }
 }

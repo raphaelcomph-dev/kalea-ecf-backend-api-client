@@ -1,0 +1,32 @@
+export class EcfIndicatorsOutputDto {
+    ativoTotal: number;
+    patrimonioLiquido: number;
+    dividasBancariasLiquida: number;
+    receitaOperacionalLiquida: number;
+    lucroOperacional: number;
+    lucroLiquido: number;
+    ebitda: number;
+    autogeracao: number;
+    saldoFinalDeDisponibilidades: number;
+    endividamentoGeral: number;
+    endividamentoFinanceiro: number;
+    endividamentoCurtoPrazo: number;
+    dblEbitda: number;
+    capacidadePagamentoJuros: number;
+    autogeracaoNecessidadeDeCapitalDeGiro: number;
+    grauDeAlavancagem: number;
+    coberturaDeFinanciamentos: number;
+    lucratividadeBruta: number;
+    lucratividadeOperacional: number;
+    lucratividadeLiquida: number;
+    ebitdaRol: number;
+    rentabilidadePatrimonial: number;
+    rentabilidadeAtivo: number;
+    pontoDeEqulíbrioOperacional: number;
+    liquidezGeral: number;
+    liquidezSeca: number;
+    liquidezCorrente: number;
+    cicloOperacional: number;
+    cicloFinanceiro: number;
+    necessidadeDeCapitalDeGiro: number;
+}

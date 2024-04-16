@@ -2,11 +2,15 @@ import { Column, Entity, JoinTable, ManyToMany, OneToMany } from "typeorm";
 import { BaseModel } from "../../shared/models/base.model";
 import { UserModel } from "./user.model";
 import { CustomerUserModel } from "./customer-user.model";
+import { CustomerBalanceModel } from "./customer-balance.model";
 
 @Entity("Customer")
 export class CustomerModel extends BaseModel {
     @Column({ name: "CompanyName" })
     companyName: string;
+
+    @OneToMany(() => CustomerBalanceModel, (customerBalance) => customerBalance.customer)
+    customerBalances: CustomerBalanceModel[];
 
     // @OneToMany(() => UserModel, (user) => user.customer)
     // @JoinTable({ name: "CustomerUser" })
