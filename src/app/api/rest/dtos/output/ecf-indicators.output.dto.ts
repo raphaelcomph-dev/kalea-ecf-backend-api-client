@@ -1,4 +1,5 @@
 export class EcfIndicatorsOutputDto {
+    year: number;
     ativoTotal: number;
     patrimonioLiquido: number;
     dividasBancariasLiquida: number;
@@ -22,7 +23,7 @@ export class EcfIndicatorsOutputDto {
     ebitdaRol: number;
     rentabilidadePatrimonial: number;
     rentabilidadeAtivo: number;
-    pontoDeEqulíbrioOperacional: number;
+    pontoDeEqulibrioOperacional: number;
     liquidezGeral: number;
     liquidezSeca: number;
     liquidezCorrente: number;

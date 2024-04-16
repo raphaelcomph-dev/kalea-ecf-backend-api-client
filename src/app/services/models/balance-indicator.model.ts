@@ -78,7 +78,7 @@ export class BalanceIndicatorModel extends BaseModel {
     rentabilidadeAtivo: number;
 
     @Column({ name: "PontoDeEqulíbrioOperacional", type: "decimal" })
-    pontoDeEqulíbrioOperacional: number;
+    pontoDeEqulibrioOperacional: number;
 
     @Column({ name: "LiquidezGeral", type: "decimal" })
     liquidezGeral: number;

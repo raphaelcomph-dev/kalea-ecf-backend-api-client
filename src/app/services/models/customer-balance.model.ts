@@ -1,4 +1,4 @@
-import { Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { BaseModel } from "../../shared/models/base.model";
 import { CustomerModel } from "./customer.model";
 import { BalanceIndicatorModel } from "./balance-indicator.model";
@@ -15,6 +15,8 @@ export class CustomerBalanceModel extends BaseModel {
     ecfFileProcessInfo: EcfFileProcessInfoModel;
 
     @OneToOne(() => BalanceIndicatorModel)
-    @JoinColumn()
     balanceIndicator: BalanceIndicatorModel;
+
+    @Column({ name: "Year" })
+    year: number;
 }

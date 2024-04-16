@@ -13,9 +13,8 @@ export class FindIndicatorsUseCase {
             throw new NotFoundException("Não foi encontrado os indicadores do ecf informado");
         }
 
-        // TODO: incluir mês e ano do CustomerBalance
-
         const response: EcfIndicatorsOutputDto = {
+            year: balance.customerBalance.year,
             ativoTotal: balance.ativoTotal,
             patrimonioLiquido: balance.patrimonioLiquido,
             dividasBancariasLiquida: balance.dividasBancariasLiquida,
@@ -39,7 +38,7 @@ export class FindIndicatorsUseCase {
             ebitdaRol: balance.ebitdaRol,
             rentabilidadePatrimonial: balance.rentabilidadePatrimonial,
             rentabilidadeAtivo: balance.rentabilidadeAtivo,
-            pontoDeEqulíbrioOperacional: balance.pontoDeEqulíbrioOperacional,
+            pontoDeEqulibrioOperacional: balance.pontoDeEqulibrioOperacional,
             liquidezGeral: balance.liquidezGeral,
             liquidezSeca: balance.liquidezSeca,
             liquidezCorrente: balance.liquidezCorrente,
