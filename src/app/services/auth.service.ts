@@ -5,6 +5,8 @@ import { LoginOutputDto } from "../api/rest/dtos/output/login.output.dto";
 import { LoginUseCase } from "./usecases/login.usecase";
 import { JwtService } from "@nestjs/jwt";
 import { CustomerRepository } from "./infra/repositories/customer.repository";
+import { UsernameInputDto } from "../api/rest/dtos/input/username.input.dto";
+import { PasswordForgotUseCase } from "./usecases/password-forgot.usecase";
 
 @Injectable()
 export class AuthService {
@@ -16,5 +18,9 @@ export class AuthService {
 
     login(dto: LoginInputDto): Promise<LoginOutputDto> {
         return new LoginUseCase(this.userRepository, this.customerRepository, this.jwtService).execute(dto);
+    }
+
+    passwordForgot(dto: UsernameInputDto): Promise<void> {
+        return new PasswordForgotUseCase(this.userRepository).execute(dto);
     }
 }

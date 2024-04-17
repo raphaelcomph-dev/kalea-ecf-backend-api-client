@@ -1,3 +1,4 @@
+import { NotificationModule } from "./notification/notification.module";
 import { BalanceIndicatorModel } from "./services/models/balance-indicator.model";
 import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { TerminusModule } from "@nestjs/terminus";
@@ -23,8 +24,12 @@ import { ApiContext } from "./shared/api-context";
 import { BalanceRepository } from "./services/infra/repositories/balance.repository";
 import { CustomerBalanceModel } from "./services/models/customer-balance.model";
 
+import "./shared/extensions/number.extension";
+import "./shared/extensions/string.extension";
+
 @Module({
     imports: [
+        NotificationModule,
         ConfigModule.forRoot(),
         TerminusModule,
         JwtModule.register({}),
