@@ -30,6 +30,10 @@ export class EcfService {
     }
 
     async delete(fileInfoId: number): Promise<void> {
-        return new DeleteEcfUseCase(this.ecfFileRepository, this.ecfFileProcessInfoRepository).execute(fileInfoId);
+        return new DeleteEcfUseCase(
+            this.ecfFileRepository,
+            this.ecfFileProcessInfoRepository,
+            this.balanceRepository,
+        ).execute(fileInfoId);
     }
 }

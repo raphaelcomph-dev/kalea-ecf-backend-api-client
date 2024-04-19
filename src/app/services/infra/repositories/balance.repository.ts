@@ -22,4 +22,15 @@ export class BalanceRepository {
             },
         });
     }
+
+    async deleteBalanceAndIndicatorsByFileInfoId(ecfInfoId: number): Promise<void> {
+        const customerBalance = await this.customerBalanceModelTypeormRepository.findOneBy({
+            ecfFileProcessInfo: { id: ecfInfoId },
+        });
+        if (customerBalance) {
+            const customerBalanceId = customerBalance.id;
+            await this.customerBalanceModelTypeormRepository.delete({ id: customerBalanceId });
+            await this.balanceIndicatorModelTypeormRepository.delete({ customerBalance: { id: customerBalanceId } });
+        }
+    }
 }

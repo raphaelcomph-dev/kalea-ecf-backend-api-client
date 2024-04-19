@@ -1,11 +1,13 @@
 import { NotFoundException } from "@nestjs/common";
 import { EcfFileProcessInfoRepository } from "../infra/repositories/ecf-file-processing-info.repository";
 import { EcfFileRepository } from "../infra/repositories/ecf-file.repository";
+import { BalanceRepository } from "../infra/repositories/balance.repository";
 
 export class DeleteEcfUseCase {
     constructor(
         private readonly ecfFileRepository: EcfFileRepository,
         private readonly ecfFileProcessInfoRepository: EcfFileProcessInfoRepository,
+        private readonly balanceRepository: BalanceRepository,
     ) {}
 
     async execute(ecfInfoId: number): Promise<void> {
@@ -18,6 +20,7 @@ export class DeleteEcfUseCase {
 
         await this.ecfFileRepository.deleteByFileInfoId(ecfFileInfoId);
         await this.ecfFileProcessInfoRepository.delete(ecfFileInfoId);
+        await this.balanceRepository.deleteBalanceAndIndicatorsByFileInfoId(ecfInfoId);
 
         // TODO: validar que ECF pertence ao usuário
     }
