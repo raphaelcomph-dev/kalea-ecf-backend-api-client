@@ -7,6 +7,7 @@ import { EcfFileRepository } from "./infra/repositories/ecf-file.repository";
 import { FindIndicatorsUseCase } from "./usecases/find-indicators.usecase";
 import { ListAllEcfUsecase } from "./usecases/list-all-ecf.usecase";
 import { UploadEcfUseCase } from "./usecases/upload-ecf.usecase";
+import { DeleteEcfUseCase } from "./usecases/delete-ecf.usecase";
 
 @Injectable()
 export class EcfService {
@@ -26,5 +27,9 @@ export class EcfService {
 
     async findIndicatorsByEcfInfoId(ecfInfoId: number): Promise<EcfIndicatorsOutputDto> {
         return new FindIndicatorsUseCase(this.balanceRepository).execute(ecfInfoId);
+    }
+
+    async delete(fileInfoId: number): Promise<void> {
+        return new DeleteEcfUseCase(this.ecfFileRepository, this.ecfFileProcessInfoRepository).execute(fileInfoId);
     }
 }

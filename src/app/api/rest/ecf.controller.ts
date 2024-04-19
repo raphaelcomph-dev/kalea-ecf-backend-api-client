@@ -1,4 +1,4 @@
-import { Controller, Get, Logger, Param, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
+import { Controller, Delete, Get, Logger, Param, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { EcfService } from "../../services/ecf.service";
 import { EcfListItemOutputDto } from "./dtos/output/ecf-list-item.output.dto";
@@ -9,6 +9,8 @@ export class EcfController {
     private readonly logger = new Logger(EcfController.name);
 
     constructor(private readonly ecfService: EcfService) {}
+
+    // TODO: colocar um GUARD em todos os endpoints não públicos. Não posso deixar acessar se não informar o accessToken
 
     @Post("upload")
     @UseInterceptors(FileInterceptor("file"))
@@ -25,8 +27,13 @@ export class EcfController {
 
     @Get("indicators/:fileInfoId")
     findEcfIndicators(@Param("fileInfoId") fileInfoId: number): Promise<EcfIndicatorsOutputDto> {
-        // TODO: Implementar esse método
         this.logger.log(`recebendo requisição p/ buscar os indicadores do ecf: ${fileInfoId}`);
         return this.ecfService.findIndicatorsByEcfInfoId(fileInfoId);
+    }
+
+    @Delete(":fileInfoId")
+    deleteEcf(@Param("fileInfoId") fileInfoId: number): Promise<void> {
+        this.logger.log(`recebendo requisição p/ excluir ecf: ${fileInfoId}`);
+        return this.ecfService.delete(fileInfoId);
     }
 }
