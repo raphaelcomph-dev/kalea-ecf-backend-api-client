@@ -29,11 +29,12 @@ export class KeyGenerator {
         const separators = ["-", "_", "&", "*", "#", ".", "@"];
         const separator = separators[randomInt(0, separators.length - 1)];
         const number = randomInt(100, 999);
+        const wordList = CryptoWordList.WORDS_BR.filter((e) => e.length > 3);
 
         let password = "";
         for (let i = 0; i < wordQty; i++) {
-            const wordIndex = Number.randomInt(0, CryptoWordList.WORDS.length - 1);
-            const word = CryptoWordList.WORDS[wordIndex];
+            const wordIndex = Number.randomInt(0, wordList.length - 1);
+            const word = wordList[wordIndex].removeAccents();
             password += word.changeCase("capitalize") + separator;
         }
         password += number;

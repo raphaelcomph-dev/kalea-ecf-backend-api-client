@@ -42,8 +42,8 @@ export class FindIndicatorsUseCase {
             liquidezGeral: balance.liquidezGeral,
             liquidezSeca: balance.liquidezSeca,
             liquidezCorrente: balance.liquidezCorrente,
-            cicloOperacional: balance.cicloOperacional,
-            cicloFinanceiro: balance.cicloFinanceiro,
+            cicloOperacional: Math.ceil(balance.cicloOperacional),
+            cicloFinanceiro: Math.ceil(balance.cicloFinanceiro),
             necessidadeDeCapitalDeGiro: balance.necessidadeDeCapitalDeGiro,
         };
 

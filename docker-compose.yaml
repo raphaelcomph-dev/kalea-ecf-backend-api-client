@@ -1,13 +1,18 @@
 version: "3.9"
 
 services:
-    sqlserver:
-        image: mcr.microsoft.com/mssql/server:2022-latest
-        container_name: sql_server_container
-        environment:
-            SA_PASSWORD: "YourStrong!Passw0rd"
-            ACCEPT_EULA: "Y"
+    # sqlserver:
+    #     image: mcr.microsoft.com/mssql/server:2022-latest
+    #     container_name: sql_server_container
+    #     environment:
+    #         SA_PASSWORD: "YourStrong!Passw0rd"
+    #         ACCEPT_EULA: "Y"
+    #     ports:
+    #         - "1433:1433"
+    #     volumes:
+    #         - ./data:/var/opt/mssql/data
+    smtp-server:
+        image: "mailhog/mailhog"
         ports:
-            - "1433:1433"
-        volumes:
-            - ./data:/var/opt/mssql/data
+            - "8025:8025"
+            - "1025:1025"

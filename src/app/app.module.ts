@@ -26,9 +26,44 @@ import { CustomerBalanceModel } from "./services/models/customer-balance.model";
 
 import "./shared/extensions/number.extension";
 import "./shared/extensions/string.extension";
+import { MailerModule } from "@nestjs-modules/mailer";
+
+let mailModule = null;
+if (AppSettings.isLocalEnv()) {
+    mailModule = MailerModule.forRootAsync({
+        useFactory: () => ({
+            transport: {
+                host: "localhost",
+                // secure: false,
+                // auth: {
+                //     user: "user@example.com",
+                //     pass: "topsecret",
+                // },
+                ignoreTLS: true,
+                port: 1025,
+            },
+        }),
+    });
+} else {
+    mailModule = MailerModule.forRootAsync({
+        useFactory: () => ({
+            transport: {
+                host: "smtp.mailgun.org",
+                port: 587, // or 587 for TLS
+                secure: false, // true for 465, false for other ports
+                ignoreTLS: true,
+                auth: {
+                    user: AppSettings.env.MAIL.MAILGUN.USER(),
+                    pass: AppSettings.env.MAIL.MAILGUN.PASSWORD(),
+                },
+            },
+        }),
+    });
+}
 
 @Module({
     imports: [
+        mailModule,
         NotificationModule,
         ConfigModule.forRoot(),
         TerminusModule,

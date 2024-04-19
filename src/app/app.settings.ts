@@ -1,3 +1,5 @@
+import { Constants } from "./shared/constants";
+
 export class AppSettings {
     public static env = {
         PORT: (): number => parseInt(process.env.APP_PORT) || 3000,
@@ -21,5 +23,19 @@ export class AppSettings {
                 DB_PASSWORD: (): string => process.env.DB_PASSWORD,
             },
         },
+        MAIL: {
+            MAILGUN: {
+                USER: (): string => process.env.MAILGUN_USER,
+                PASSWORD: (): string => process.env.MAILGUN_PASSWORD,
+            },
+        },
+        PORTAL: {
+            BASE_URL: (): string => process.env.PORTAL_BASE_URL,
+            PATHS: {
+                LOGIN: (): string => `${process.env.PORTAL_BASE_URL}${process.env.PORTAL_PATHS_LOGIN}`,
+            },
+        },
     };
+
+    public static isLocalEnv = (): boolean => AppSettings.env.NODE_ENV() === Constants.ENVIRONMENTS.LOCAL;
 }

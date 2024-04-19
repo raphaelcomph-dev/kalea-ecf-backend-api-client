@@ -3,6 +3,7 @@ import * as crypto from "crypto";
 declare global {
     interface String {
         changeCase(caseName: "name" | "title" | "camelCase" | "constant" | "capitalize"): string;
+        removeAccents(): string;
     }
 }
 
@@ -45,6 +46,19 @@ String.prototype.changeCase = function (caseName: "name" | "title" | "camelCase"
         default:
             throw new Error("Invalid case name.");
     }
+};
+
+String.prototype.removeAccents = function (): string {
+    const accents =
+        "ÀÁÂÃÄÅĄĀāàáâãäåąßÒÓÔÕÕÖØŐòóôőõöøĎďDŽdžÈÉÊËĘèéêëęðÇçČčĆćÐÌÍÎÏĪìíîïīÙÚÛÜŰùűúûüĽĹŁľĺłÑŇŃňñńŔŕŠŚŞšśşŤťŸÝÿýŽŻŹžżźđĢĞģğ";
+    const accentsOut =
+        "AAAAAAAAaaaaaaaaBOOOOOOOOoooooooDdDZdzEEEEEeeeeeeCcCcCcDIIIIIiiiiiUUUUUuuuuuLLLlllNNNnnnRrSSSsssTtYYyyZZZzzzdGGgg";
+    return this.split("")
+        .map((letter, index) => {
+            const accentIndex = accents.indexOf(letter);
+            return accentIndex !== -1 ? accentsOut[accentIndex] : letter;
+        })
+        .join("");
 };
 
 export {};
