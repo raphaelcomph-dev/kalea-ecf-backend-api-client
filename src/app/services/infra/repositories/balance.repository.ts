@@ -18,7 +18,7 @@ export class BalanceRepository {
             // TODO: corrigir pra colocar o customerId da sessão -> where: { customerBalance: { customer: {}, ecfFileProcessInfo: { id: ecfInfoId } } },
             where: { customerBalance: { ecfFileProcessInfo: { id: ecfInfoId } } },
             relations: {
-                customerBalance: true,
+                customerBalance: { ecfFileProcessInfo: true },
             },
         });
     }

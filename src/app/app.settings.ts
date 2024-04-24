@@ -24,9 +24,8 @@ export class AppSettings {
             },
         },
         MAIL: {
-            MAILGUN: {
-                USER: (): string => process.env.MAILGUN_USER,
-                PASSWORD: (): string => process.env.MAILGUN_PASSWORD,
+            MAILSEND: {
+                API_KEY: (): string => process.env.MAILSEND_API_KEY,
             },
         },
         PORTAL: {

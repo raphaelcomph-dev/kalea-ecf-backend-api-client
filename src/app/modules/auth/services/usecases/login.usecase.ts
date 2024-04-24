@@ -1,9 +1,9 @@
 import { NotFoundException, UnprocessableEntityException } from "@nestjs/common";
-import { LoginInputDto } from "../../api/rest/dtos/input/login.input.dto";
-import { LoginOutputDto } from "../../api/rest/dtos/output/login.output.dto";
+import { LoginInputDto } from "../../api/dtos/input/login.input.dto";
+import { LoginOutputDto } from "../../api/dtos/output/login.output.dto";
 import { UserRepository } from "../infra/repositories/user.repository";
 import { UserModel } from "../models/user.model";
-import { AppSettings } from "../../app.settings";
+import { AppSettings } from "../../../../app.settings";
 import { JwtService } from "@nestjs/jwt";
 import { CustomerModel } from "../models/customer.model";
 import { CustomerRepository } from "../infra/repositories/customer.repository";

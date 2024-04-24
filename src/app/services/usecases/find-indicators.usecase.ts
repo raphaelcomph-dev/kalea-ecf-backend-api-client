@@ -14,6 +14,8 @@ export class FindIndicatorsUseCase {
         }
 
         const response: EcfIndicatorsOutputDto = {
+            cnpj: balance.customerBalance.ecfFileProcessInfo.cnpj,
+            fileName: balance.customerBalance.ecfFileProcessInfo.fileName,
             year: balance.customerBalance.year,
             ativoTotal: balance.ativoTotal,
             patrimonioLiquido: balance.patrimonioLiquido,

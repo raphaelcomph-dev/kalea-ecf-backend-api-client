@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { BaseModel } from "../../shared/models/base.model";
-import { CustomerModel } from "./customer.model";
+import { CustomerModel } from "../../modules/auth/services/models/customer.model";
 import { BalanceIndicatorModel } from "./balance-indicator.model";
 import { EcfFileProcessInfoModel } from "./ecf-file-processing-info.model";
 

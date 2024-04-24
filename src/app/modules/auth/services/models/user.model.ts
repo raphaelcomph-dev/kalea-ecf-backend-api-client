@@ -1,5 +1,5 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany } from "typeorm";
-import { BaseModel } from "../../shared/models/base.model";
+import { BaseModel } from "../../../../shared/models/base.model";
 import { CustomerModel } from "./customer.model";
 import { CustomerUserModel } from "./customer-user.model";
 

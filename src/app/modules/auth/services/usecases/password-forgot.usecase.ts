@@ -1,10 +1,10 @@
 import { NotFoundException } from "@nestjs/common";
-import { UsernameInputDto } from "../../api/rest/dtos/input/username.input.dto";
+import { UsernameInputDto } from "../../api/dtos/input/username.input.dto";
 import { UserRepository } from "../infra/repositories/user.repository";
 import { UserModel } from "../models/user.model";
-import { KeyGenerator } from "../../shared/utils/key-generator";
-import { NotificationService } from "../../notification/services/notification.service";
-import { PasswordForgotEmailInputDto } from "../../notification/api/dtos/input/password-forgot-email.input.dto";
+import { KeyGenerator } from "../../../../shared/utils/key-generator";
+import { NotificationService } from "../../../notification/services/notification.service";
+import { PasswordForgotEmailInputDto } from "../../../notification/api/dtos/input/password-forgot-email.input.dto";
 
 export class PasswordForgotUseCase {
     private user: UserModel;

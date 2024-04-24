@@ -1,4 +1,6 @@
 export class EcfIndicatorsOutputDto {
+    cnpj: string;
+    fileName: string;
     year: number;
     ativoTotal: number;
     patrimonioLiquido: number;

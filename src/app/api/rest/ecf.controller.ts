@@ -1,8 +1,8 @@
-import { Controller, Delete, Get, Logger, Param, Post, UploadedFile, UseInterceptors } from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
+import { Controller, Delete, Get, Logger, Param, Post, UploadedFiles, UseInterceptors } from "@nestjs/common";
 import { EcfService } from "../../services/ecf.service";
+import { CustomFileInterceptor } from "../../shared/interceptors/file.interceptor";
+import { EcfIndicatorsOutputDto } from "./dtos/output/ecf-indicators.output.dto";
 import { EcfListItemOutputDto } from "./dtos/output/ecf-list-item.output.dto";
-import { EcfIndicatorsOutputDto as EcfIndicatorsOutputDto } from "./dtos/output/ecf-indicators.output.dto";
 
 @Controller("ecf")
 export class EcfController {
@@ -13,10 +13,12 @@ export class EcfController {
     // TODO: colocar um GUARD em todos os endpoints não públicos. Não posso deixar acessar se não informar o accessToken
 
     @Post("upload")
-    @UseInterceptors(FileInterceptor("file"))
-    uploadFile(@UploadedFile() file: Express.Multer.File) {
-        this.logger.log(`recebendo requisição upload do ecf: ${file.filename}, ${file.size}, ${file.mimetype}`);
-        this.ecfService.uploadEcfFile(file);
+    @UseInterceptors(new CustomFileInterceptor("files"))
+    uploadFile(@UploadedFiles() files: Express.Multer.File[]) {
+        this.logger.log(`recebendo requisição upload do ecf:`);
+        console.log(files[0]);
+
+        this.ecfService.uploadEcfFile(files[0]);
     }
 
     @Get()

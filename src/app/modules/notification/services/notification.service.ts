@@ -1,10 +1,12 @@
 import { Injectable, Logger } from "@nestjs/common";
 import { PasswordForgotEmailInputDto } from "../api/dtos/input/password-forgot-email.input.dto";
-import { AppSettings } from "../../app.settings";
-import { Constants } from "../../shared/constants";
+import { AppSettings } from "../../../app.settings";
+import { Constants } from "../../../shared/constants";
 import { MailerService } from "@nestjs-modules/mailer";
 import * as fs from "fs";
 import * as path from "path";
+import axios from "axios";
+import { EmailParams, MailerSend, Recipient, Sender } from "mailersend";
 
 @Injectable()
 export class NotificationService {
@@ -18,7 +20,7 @@ export class NotificationService {
         // const emailFolder = AppSettings.isLocalEnv()
         //     ? "../../../src/resources/email-templates"
         //     : "../../resources/email-templates";
-        const emailFolder = "../../../src/resources/email-templates";
+        const emailFolder = "../../../../src/resources/email-templates";
         let file = fs.readFileSync(path.resolve(__dirname, `${emailFolder}/password-forgot.html`), "utf-8");
 
         file = file.replaceAll("{{user.name}}", dto.name);
@@ -32,11 +34,26 @@ export class NotificationService {
             html: file,
         };
 
-        this.sendEmail(msg);
-    }
+        if (AppSettings.isLocalEnv()) {
+            const response = await this.mailerService.sendMail(msg);
+            console.log("Email sending Response", response);
+        } else {
+            const mailerSend = new MailerSend({
+                apiKey: AppSettings.env.MAIL.MAILSEND.API_KEY(),
+            });
 
-    private async sendEmail(msg): Promise<void> {
-        const response = await this.mailerService.sendMail(msg);
-        console.log("Email sending Response", response);
+            const sentFrom = new Sender("notificacoes@trial-3zxk54vn3pqljy6v.mlsender.net", "Kalea - Notificações");
+
+            const recipients = [new Recipient(dto.email, dto.name)];
+
+            const emailParams = new EmailParams()
+                .setFrom(sentFrom)
+                .setTo(recipients)
+                .setReplyTo(sentFrom)
+                .setSubject("[Kalea - ECF]: Esqueceu sua senha?")
+                .setHtml(file);
+
+            await mailerSend.email.send(emailParams);
+        }
     }
 }

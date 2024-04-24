@@ -1,13 +1,13 @@
 import { Injectable } from "@nestjs/common";
 import { UserRepository } from "./infra/repositories/user.repository";
-import { LoginInputDto } from "../api/rest/dtos/input/login.input.dto";
-import { LoginOutputDto } from "../api/rest/dtos/output/login.output.dto";
+import { LoginInputDto } from "../api/dtos/input/login.input.dto";
+import { LoginOutputDto } from "../api/dtos/output/login.output.dto";
 import { LoginUseCase } from "./usecases/login.usecase";
 import { JwtService } from "@nestjs/jwt";
-import { CustomerRepository } from "./infra/repositories/customer.repository";
-import { UsernameInputDto } from "../api/rest/dtos/input/username.input.dto";
+import { UsernameInputDto } from "../api/dtos/input/username.input.dto";
 import { PasswordForgotUseCase } from "./usecases/password-forgot.usecase";
-import { NotificationService } from "../notification/services/notification.service";
+import { NotificationService } from "../../notification/services/notification.service";
+import { CustomerRepository } from "./infra/repositories/customer.repository";
 
 @Injectable()
 export class AuthService {

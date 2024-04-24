@@ -1,8 +1,8 @@
 import { Column, Entity, JoinTable, ManyToMany, OneToMany } from "typeorm";
-import { BaseModel } from "../../shared/models/base.model";
+import { BaseModel } from "../../../../shared/models/base.model";
 import { UserModel } from "./user.model";
 import { CustomerUserModel } from "./customer-user.model";
-import { CustomerBalanceModel } from "./customer-balance.model";
+import { CustomerBalanceModel } from "../../../../services/models/customer-balance.model";
 
 @Entity("Customer")
 export class CustomerModel extends BaseModel {
