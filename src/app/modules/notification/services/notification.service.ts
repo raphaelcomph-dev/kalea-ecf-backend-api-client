@@ -17,10 +17,9 @@ export class NotificationService {
     async sendForgotPasswordEmail(dto: PasswordForgotEmailInputDto): Promise<void> {
         this.logger.log("Sending forgot password email to " + dto.email);
 
-        // const emailFolder = AppSettings.isLocalEnv()
-        //     ? "../../../src/resources/email-templates"
-        //     : "../../resources/email-templates";
-        const emailFolder = "../../../../src/resources/email-templates";
+        const emailFolder = AppSettings.isLocalEnv()
+            ? "../../../../src/resources/email-templates"
+            : "../../../resources/email-templates";
         let file = fs.readFileSync(path.resolve(__dirname, `${emailFolder}/password-forgot.html`), "utf-8");
 
         file = file.replaceAll("{{user.name}}", dto.name);
