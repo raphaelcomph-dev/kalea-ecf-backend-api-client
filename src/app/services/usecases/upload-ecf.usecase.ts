@@ -20,6 +20,8 @@ export class UploadEcfUseCase {
             fileSize: file.size,
         });
 
+        // TODO: verificar se o arquivo é do tipo PDF e se ele tem menos que 50MB
+
         await this.ecfFileProcessInfoRepository.save(processingInfo);
 
         const ecfFile = new EcfFileModel({
