@@ -16,11 +16,11 @@ export class EcfFileProcessInfoRepository {
     }
 
     findByEcfInfoId(ecfInfoId: number): Promise<EcfFileProcessInfoModel> {
-        return this.typeormRepository.findOneBy({ id: ecfInfoId });
+        return this.typeormRepository.findOneBy({ id: ecfInfoId, userId: ApiContext.getContext().userId });
     }
 
     async delete(ecfFileInfoId: number): Promise<void> {
-        await this.typeormRepository.delete({ id: ecfFileInfoId });
+        await this.typeormRepository.delete({ id: ecfFileInfoId, userId: ApiContext.getContext().userId });
     }
 
     async save(ecfFile: EcfFileProcessInfoModel): Promise<void> {
