@@ -1,6 +1,7 @@
 import { Controller, Delete, Get, Logger, Param, Post, UploadedFiles, UseInterceptors } from "@nestjs/common";
 import {
     ApiBadRequestResponse,
+    ApiBearerAuth,
     ApiBody,
     ApiConsumes,
     ApiCreatedResponse,
@@ -20,6 +21,7 @@ import { EcfListItemOutputDto } from "./dtos/output/ecf-list-item.output.dto";
 
 @ApiTags("ecf")
 @Controller("ecf")
+@ApiBearerAuth("access-token")
 export class EcfController {
     private readonly logger = new Logger(EcfController.name);
 
