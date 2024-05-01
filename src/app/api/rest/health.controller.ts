@@ -2,9 +2,11 @@ import { Controller, Get } from "@nestjs/common";
 import { ApiOperation, ApiTags } from "@nestjs/swagger";
 import { HealthCheckService, HttpHealthIndicator, HealthCheck, TypeOrmHealthIndicator } from "@nestjs/terminus";
 import * as pkg from "pkginfo";
+import { Public } from "../../shared/auth.guard";
 
 @ApiTags("health")
 @Controller("health")
+@Public()
 export class HealthController {
     private readonly version: string;
 

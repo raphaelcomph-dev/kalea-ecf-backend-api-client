@@ -14,9 +14,11 @@ import { AuthService } from "../services/auth.service";
 import { LoginInputDto } from "./dtos/input/login.input.dto";
 import { UsernameInputDto } from "./dtos/input/username.input.dto";
 import { LoginOutputDto } from "./dtos/output/login.output.dto";
+import { Public } from "../../../shared/auth.guard";
 
 @ApiTags("auth")
 @Controller("auth")
+@Public()
 export class AuthController {
     private readonly logger = new Logger(AuthController.name);
 

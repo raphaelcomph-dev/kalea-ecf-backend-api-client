@@ -18,7 +18,9 @@ import { BalanceIndicatorModel } from "./services/models/balance-indicator.model
 import { CustomerBalanceModel } from "./services/models/customer-balance.model";
 import { EcfFileProcessInfoModel } from "./services/models/ecf-file-processing-info.model";
 import { EcfFileModel } from "./services/models/ecf-file.model";
-import { ApiContext } from "./shared/api-context";
+import { ApiContext } from "./shared/api-context.middleware";
+import { APP_GUARD } from "@nestjs/core";
+import { AuthGuard } from "./shared/auth.guard";
 
 import "./shared/extensions/number.extension";
 import "./shared/extensions/string.extension";
@@ -57,7 +59,18 @@ import "./shared/extensions/string.extension";
         TypeOrmModule.forFeature([BalanceIndicatorModel, CustomerBalanceModel, EcfFileProcessInfoModel, EcfFileModel]),
     ],
     controllers: [EcfController, HealthController],
-    providers: [ApiContext, EcfService, EcfFileRepository, EcfFileProcessInfoRepository, BalanceRepository],
+    providers: [
+        ApiContext,
+        AuthGuard,
+        {
+            provide: APP_GUARD,
+            useClass: AuthGuard,
+        },
+        EcfService,
+        EcfFileRepository,
+        EcfFileProcessInfoRepository,
+        BalanceRepository,
+    ],
 })
 export class AppModule {
     configure(consumer: MiddlewareConsumer) {

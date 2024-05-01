@@ -4,7 +4,9 @@
 # @base_url = https://us-central1-doula-app-br.cloudfunctions.net/doula_app_backend_api_identity-qa
 # Local
 @base_url = http://localhost:6251
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ1.eyJzdWIiOjIsImN1c3RvbWVySWQiOjIsIm5hbWUiOiJMYWVydGUiLCJlbWFpbCI6ImxhZXJ0ZS5yb2RyaWd1ZXNAa2FsZWFjcmVkLmNvbSIsImlhdCI6MTcxNDU5MDMxOSwiZXhwIjoxNzE3MTgyMzE5fQ.KH35x-0okZhlxrQuKpnl1uaZb8sae0toid1YLoj79vI
 
 GET {{base_url}}/api/ecf/indicators/3
+Authorization: Bearer {{accessToken}}
 
 ###

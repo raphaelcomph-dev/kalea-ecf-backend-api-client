@@ -5,6 +5,9 @@
 # Local
 @base_url = http://localhost:6251
 
+@accessToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsImN1c3RvbWVySWQiOjIsIm5hbWUiOiJMYWVydGUiLCJlbWFpbCI6ImxhZXJ0ZS5yb2RyaWd1ZXNAa2FsZWFjcmVkLmNvbSIsImlhdCI6MTcxNDU5MDMxOSwiZXhwIjoxNzE3MTgyMzE5fQ.KH35x-0okZhlxrQuKpnl1uaZb8sae0toid1YLoj79vI
+
 DELETE {{base_url}}/api/ecf/3
+Authorization: Bearer {{accessToken}}
 
 ###

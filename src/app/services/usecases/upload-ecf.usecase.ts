@@ -1,4 +1,4 @@
-import { ApiContext } from "../../shared/api-context";
+import { ApiContext } from "../../shared/api-context.middleware";
 import { EcfFileProcessInfoRepository } from "../infra/repositories/ecf-file-processing-info.repository";
 import { EcfFileRepository } from "../infra/repositories/ecf-file.repository";
 import { EcfFileProcessInfoModel } from "../models/ecf-file-processing-info.model";

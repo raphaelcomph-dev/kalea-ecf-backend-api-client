@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { EcfFileProcessInfoModel } from "../../models/ecf-file-processing-info.model";
 import { Repository } from "typeorm";
-import { ApiContext } from "../../../shared/api-context";
+import { ApiContext } from "../../../shared/api-context.middleware";
 
 @Injectable()
 export class EcfFileProcessInfoRepository {

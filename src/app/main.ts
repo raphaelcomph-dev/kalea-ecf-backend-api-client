@@ -24,7 +24,6 @@ async function bootstrap() {
             "Esta página contém a documentação de todos os endpoint atualmente disponíveis na API pública do projeto Kalea:ECF. \n\n Esta API abrange os endpoint de healthcheck, autenticação de usuários e manutenção de arquivos ECF . \n\nTodos os endpoints são protegidos por autenticação JWT que precisa ser enviada no header de cada requisição, excetuando os endpoints `/api/auth/...` e `/api/health`. \n\nEsta API também é utilizada pelo frontend do projeto.",
         )
         .setVersion("1.1.0")
-        .setBasePath("api")
         .addBearerAuth(
             {
                 type: "http",

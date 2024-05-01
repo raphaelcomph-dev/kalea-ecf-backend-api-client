@@ -9,18 +9,11 @@ export class ApiContext implements NestMiddleware {
     constructor(private readonly jwtService: JwtService) {}
 
     use(req: any, res: any, next: (error?: any) => void) {
-        this.extractContextFromRequestHeaders(req);
-
-        // this.throwExceptionIfUserIdIsMissing();
+        ApiContext._customerId = null;
+        ApiContext._userId = null;
 
         next();
     }
-
-    // private throwExceptionIfUserIdIsMissing() {
-    //     if (!ApiContext._userId) {
-    //         throw new PreconditionFailedException("User id not found in headers");
-    //     }
-    // }
 
     private extractContextFromRequestHeaders(req: any) {
         if (req.headers && req.headers.authorization) {
@@ -32,6 +25,11 @@ export class ApiContext implements NestMiddleware {
                 ApiContext._userId = tokenDecoded.sub;
             }
         }
+    }
+
+    static setContext(customerId: number, userId: number): void {
+        ApiContext._customerId = customerId;
+        ApiContext._userId = userId;
     }
 
     static getContext(): { customerId: number; userId: number } {

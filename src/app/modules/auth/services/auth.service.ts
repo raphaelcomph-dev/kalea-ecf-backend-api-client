@@ -8,6 +8,8 @@ import { UsernameInputDto } from "../api/dtos/input/username.input.dto";
 import { PasswordForgotUseCase } from "./usecases/password-forgot.usecase";
 import { NotificationService } from "../../notification/services/notification.service";
 import { CustomerRepository } from "./infra/repositories/customer.repository";
+import { TokenValidationOutputDto } from "../api/dtos/output/token-validation.output.dto";
+import { TokenValidationUsecase } from "./usecases/token-validation.usecase";
 
 @Injectable()
 export class AuthService {
@@ -24,5 +26,9 @@ export class AuthService {
 
     passwordForgot(dto: UsernameInputDto): Promise<void> {
         return new PasswordForgotUseCase(this.userRepository, this.notificationService).execute(dto);
+    }
+
+    validateAccessToken(accessToken: string): Promise<TokenValidationOutputDto> {
+        return new TokenValidationUsecase(this.jwtService).execute(accessToken);
     }
 }

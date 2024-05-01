@@ -11,7 +11,7 @@ import { CustomerRepository } from "./services/infra/repositories/customer.repos
 import { NotificationModule } from "../notification/notification.module";
 
 @Module({
-    exports: [JwtModule.register({})],
+    exports: [JwtModule.register({}), AuthService],
     imports: [
         JwtModule.register({}),
         TypeOrmModule.forFeature([UserModel, CustomerUserModel, CustomerModel]),
