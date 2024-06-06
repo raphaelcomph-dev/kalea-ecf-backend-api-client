@@ -41,6 +41,7 @@ const createFunction = async (expressInstance): Promise<void> => {
         .build();
     const document = SwaggerModule.createDocument(app, config);
     SwaggerModule.setup("api/docs", app, document);
+    console.log(`Version: ${version}`);
 
     await app.init();
 };

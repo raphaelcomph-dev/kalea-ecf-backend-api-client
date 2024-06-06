@@ -5,6 +5,8 @@ import { AppModule } from "./app.module";
 import * as dotenv from "dotenv";
 import * as express from "express";
 import * as functions from "firebase-functions";
+import * as pkg from "pkginfo";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
 
 const expressServer = express();
 const createFunction = async (expressInstance): Promise<void> => {
@@ -14,6 +16,33 @@ const createFunction = async (expressInstance): Promise<void> => {
     app.enableCors();
     app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
     app.setGlobalPrefix("api");
+
+    pkg(module, "version");
+    const version = module.exports.version;
+
+    const config = new DocumentBuilder()
+        .setTitle("Kalea:ECF - Public API")
+        .setDescription(
+            "Esta página contém a documentação de todos os endpoint atualmente disponíveis na API pública do projeto Kalea:ECF. \n\n Esta API abrange os endpoint de healthcheck, autenticação de usuários e manutenção de arquivos ECF . \n\nTodos os endpoints são protegidos por autenticação JWT que precisa ser enviada no header de cada requisição, excetuando os endpoints `/api/auth/...` e `/api/health`. \n\nEsta API também é utilizada pelo frontend do projeto.",
+        )
+        .setVersion(version)
+        .addServer("/kalea_ecf_backend_api_client-prod")
+        .addBearerAuth(
+            {
+                type: "http",
+                scheme: "bearer",
+                bearerFormat: "JWT",
+                name: "JWT",
+                description: "Enter JWT token",
+                in: "header",
+            },
+            "access-token",
+        )
+        .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup("api/docs", app, document);
+    console.log(`Version: ${version}`);
+
     await app.init();
 };
 export const kalea_ecf_prod_backend_api_client = functions.https.onRequest(async (request, response) => {

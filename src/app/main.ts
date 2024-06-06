@@ -45,5 +45,6 @@ async function bootstrap() {
     await app.listen(AppSettings.env.PORT());
     const url = await app.getUrl();
     console.log(`Application is running on ${url}`);
+    console.log(`Version: ${version}`);
 }
 bootstrap();
