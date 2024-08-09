@@ -7,7 +7,7 @@ import { Module } from "@nestjs/common";
         MailerModule.forRootAsync({
             useFactory: () => ({
                 transport: {
-                    host: "localhost",
+                    host: "0.0.0.0",
                     // secure: false,
                     // auth: {
                     //     user: "user@example.com",
