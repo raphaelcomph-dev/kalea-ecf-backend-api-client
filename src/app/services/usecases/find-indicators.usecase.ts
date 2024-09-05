@@ -1,19 +1,52 @@
 import { NotFoundException } from "@nestjs/common";
 import { EcfIndicatorsOutputDto } from "../../api/rest/dtos/output/ecf-indicators.output.dto";
 import { BalanceRepository } from "../infra/repositories/balance.repository";
+import { EcfProcessInfoRepository } from "../infra/repositories/ecf-processing-info.repository";
+import { Formatter } from "../../shared/utils/formatter";
+import { BalanceIndicatorModel } from "../models/balance-indicator.model";
 
 export class FindIndicatorsUseCase {
-    constructor(private readonly ecfFileRepository: BalanceRepository) {}
+    constructor(
+        private readonly balanceRepository: BalanceRepository,
+        private readonly ecfProcessInfoRepository: EcfProcessInfoRepository,
+    ) {}
 
-    async execute(ecfInfoId: number): Promise<EcfIndicatorsOutputDto> {
-        const balance = await this.ecfFileRepository.findByEcfInfoId(ecfInfoId);
+    async findByEcfProcessingInfoId(ecfInfoId: number): Promise<EcfIndicatorsOutputDto> {
+        const balance = await this.balanceRepository.findByEcfInfoId(ecfInfoId);
         console.log("Balance", balance);
 
         if (!balance) {
             throw new NotFoundException("Não foi encontrado os indicadores do ecf informado");
         }
 
-        const response: EcfIndicatorsOutputDto = {
+        const response: EcfIndicatorsOutputDto = this.mapBalanceToDto(balance);
+
+        return response;
+    }
+
+    async findByCnpj(cnpj: string): Promise<EcfIndicatorsOutputDto[]> {
+        const ecfsInfo = await this.ecfProcessInfoRepository.findByCnpj(Formatter.formatDocument(cnpj, "CNPJ"));
+
+        if (!ecfsInfo?.length) {
+            throw new NotFoundException("Não foi encontrado arquivos para o CNPJ informado");
+        }
+
+        const ecfInfoIds = ecfsInfo.map((ecf) => ecf.id);
+
+        const balances = await this.balanceRepository.findByEcfInfoIds(ecfInfoIds);
+
+        if (!balances?.length) {
+            throw new NotFoundException("Não foi encontrado indicadores para o CNPJ informado");
+        }
+
+        const indicators = balances.map((balance) => {
+            return this.mapBalanceToDto(balance);
+        });
+        return indicators;
+    }
+
+    private mapBalanceToDto(balance: BalanceIndicatorModel): EcfIndicatorsOutputDto {
+        return {
             cnpj: balance.customerBalance.ecfFileProcessInfo.cnpj,
             fileName: balance.customerBalance.ecfFileProcessInfo.fileName,
             year: balance.customerBalance.year,
@@ -48,7 +81,5 @@ export class FindIndicatorsUseCase {
             cicloFinanceiro: Math.ceil(balance.cicloFinanceiro),
             necessidadeDeCapitalDeGiro: balance.necessidadeDeCapitalDeGiro,
         };
-
-        return response;
     }
 }

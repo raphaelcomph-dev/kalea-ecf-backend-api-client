@@ -1,5 +1,5 @@
 import { ApiContext } from "../../shared/api-context.middleware";
-import { EcfFileProcessInfoRepository } from "../infra/repositories/ecf-file-processing-info.repository";
+import { EcfProcessInfoRepository } from "../infra/repositories/ecf-processing-info.repository";
 import { EcfFileRepository } from "../infra/repositories/ecf-file.repository";
 import { EcfInfoModel } from "../models/ecf-info.model";
 import { EcfFileModel } from "../models/ecf-file.model";
@@ -7,7 +7,7 @@ import { EcfFileModel } from "../models/ecf-file.model";
 export class UploadEcfUseCase {
     constructor(
         private readonly ecfFileRepository: EcfFileRepository,
-        private readonly ecfFileProcessInfoRepository: EcfFileProcessInfoRepository,
+        private readonly ecfFileProcessInfoRepository: EcfProcessInfoRepository,
     ) {}
 
     async execute(file: Express.Multer.File) {

@@ -1,12 +1,12 @@
 import { NotFoundException } from "@nestjs/common";
-import { EcfFileProcessInfoRepository } from "../infra/repositories/ecf-file-processing-info.repository";
+import { EcfProcessInfoRepository } from "../infra/repositories/ecf-processing-info.repository";
 import { EcfFileRepository } from "../infra/repositories/ecf-file.repository";
 import { BalanceRepository } from "../infra/repositories/balance.repository";
 
 export class DeleteEcfUseCase {
     constructor(
         private readonly ecfFileRepository: EcfFileRepository,
-        private readonly ecfFileProcessInfoRepository: EcfFileProcessInfoRepository,
+        private readonly ecfFileProcessInfoRepository: EcfProcessInfoRepository,
         private readonly balanceRepository: BalanceRepository,
     ) {}
 

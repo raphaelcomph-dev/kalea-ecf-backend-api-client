@@ -5,7 +5,7 @@ import { Repository } from "typeorm";
 import { ApiContext } from "../../../shared/api-context.middleware";
 
 @Injectable()
-export class EcfFileProcessInfoRepository {
+export class EcfProcessInfoRepository {
     constructor(
         @InjectRepository(EcfInfoModel)
         private readonly typeormRepository: Repository<EcfInfoModel>,
@@ -17,6 +17,10 @@ export class EcfFileProcessInfoRepository {
 
     findByEcfInfoId(ecfInfoId: number): Promise<EcfInfoModel> {
         return this.typeormRepository.findOneBy({ id: ecfInfoId, userId: ApiContext.getContext().userId });
+    }
+
+    findByCnpj(cnpj: string): Promise<EcfInfoModel[]> {
+        return this.typeormRepository.findBy({ cnpj, userId: ApiContext.getContext().userId });
     }
 
     async delete(ecfFileInfoId: number): Promise<void> {

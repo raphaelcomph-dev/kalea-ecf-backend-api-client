@@ -12,7 +12,7 @@ import { UserModel } from "./modules/auth/services/models/user.model";
 import { NotificationModule } from "./modules/notification/notification.module";
 import { EcfService } from "./services/ecf.service";
 import { BalanceRepository } from "./services/infra/repositories/balance.repository";
-import { EcfFileProcessInfoRepository } from "./services/infra/repositories/ecf-file-processing-info.repository";
+import { EcfProcessInfoRepository } from "./services/infra/repositories/ecf-processing-info.repository";
 import { EcfFileRepository } from "./services/infra/repositories/ecf-file.repository";
 import { BalanceIndicatorModel } from "./services/models/balance-indicator.model";
 import { CustomerBalanceModel } from "./services/models/customer-balance.model";
@@ -68,7 +68,7 @@ import "./shared/extensions/string.extension";
         },
         EcfService,
         EcfFileRepository,
-        EcfFileProcessInfoRepository,
+        EcfProcessInfoRepository,
         BalanceRepository,
     ],
 })

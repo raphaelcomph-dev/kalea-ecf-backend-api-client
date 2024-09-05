@@ -2,7 +2,7 @@ import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
 import { BalanceIndicatorModel } from "../../models/balance-indicator.model";
 import { CustomerBalanceModel } from "../../models/customer-balance.model";
-import { Repository } from "typeorm";
+import { In, Repository } from "typeorm";
 import { ApiContext } from "../../../shared/api-context.middleware";
 
 @Injectable()
@@ -20,6 +20,20 @@ export class BalanceRepository {
                 customerBalance: {
                     customer: { id: ApiContext.getContext().customerId },
                     ecfFileProcessInfo: { id: ecfInfoId },
+                },
+            },
+            relations: {
+                customerBalance: { ecfFileProcessInfo: true },
+            },
+        });
+    }
+
+    async findByEcfInfoIds(ecfInfoIds: number[]): Promise<BalanceIndicatorModel[]> {
+        return await this.balanceIndicatorModelTypeormRepository.find({
+            where: {
+                customerBalance: {
+                    customer: { id: ApiContext.getContext().customerId },
+                    ecfFileProcessInfo: { id: In(ecfInfoIds) },
                 },
             },
             relations: {

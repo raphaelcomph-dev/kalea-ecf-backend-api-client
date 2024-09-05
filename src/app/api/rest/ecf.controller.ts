@@ -114,6 +114,12 @@ export class EcfController {
         return this.ecfService.findIndicatorsByEcfInfoId(fileInfoId);
     }
 
+    @Get("company/:cnpj/indicators")
+    findEcfCompanyIndicators(@Param("cnpj") cnpj: string): Promise<EcfIndicatorsOutputDto[]> {
+        this.logger.log(`recebendo requisição p/ buscar os indicadores dos ecf's da empresa: ${cnpj}`);
+        return this.ecfService.findIndicatorsByCnpj(cnpj);
+    }
+
     @ApiOperation({
         description: "Exclui um arquivo ECF (binário, meta-dados e indicadores) do usuário logado.",
     })
