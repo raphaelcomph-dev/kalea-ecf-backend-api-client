@@ -16,7 +16,7 @@ import { EcfFileProcessInfoRepository } from "./services/infra/repositories/ecf-
 import { EcfFileRepository } from "./services/infra/repositories/ecf-file.repository";
 import { BalanceIndicatorModel } from "./services/models/balance-indicator.model";
 import { CustomerBalanceModel } from "./services/models/customer-balance.model";
-import { EcfFileProcessInfoModel } from "./services/models/ecf-file-processing-info.model";
+import { EcfInfoModel } from "./services/models/ecf-info.model";
 import { EcfFileModel } from "./services/models/ecf-file.model";
 import { ApiContext } from "./shared/api-context.middleware";
 import { APP_GUARD } from "@nestjs/core";
@@ -48,7 +48,7 @@ import "./shared/extensions/string.extension";
                         CustomerBalanceModel,
                         CustomerUserModel,
                         CustomerModel,
-                        EcfFileProcessInfoModel,
+                        EcfInfoModel,
                         EcfFileModel,
                         UserModel,
                     ],
@@ -56,7 +56,7 @@ import "./shared/extensions/string.extension";
             },
         }),
 
-        TypeOrmModule.forFeature([BalanceIndicatorModel, CustomerBalanceModel, EcfFileProcessInfoModel, EcfFileModel]),
+        TypeOrmModule.forFeature([BalanceIndicatorModel, CustomerBalanceModel, EcfInfoModel, EcfFileModel]),
     ],
     controllers: [EcfController, HealthController],
     providers: [

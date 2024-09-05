@@ -11,18 +11,30 @@ export class ListAllEcfUsecase {
     async execute(): Promise<EcfListItemOutputDto[]> {
         const ecfList = await this.ecfFileProcessInfoRepository.findAll();
 
-        if (ecfList) {
-            return ecfList.map((ecf) => {
-                return {
-                    id: ecf.id,
-                    fileName: ecf.fileName,
-                    fileDate: ecf.inProgressDate,
-                    cnpj: ecf.cnpj,
-                    status: ecf.status,
-                };
-            });
+        if (!ecfList) {
+            return [];
         }
 
-        return [];
+        const groupedResult: { [key: string]: EcfListItemOutputDto } = {};
+
+        ecfList.forEach((e) => {
+            if (!groupedResult[e.cnpj]) {
+                groupedResult[e.cnpj] = {
+                    companyName: e.companyName,
+                    cnpj: e.cnpj,
+                    files: [],
+                };
+            }
+
+            groupedResult[e.cnpj].files.push({
+                id: e.id,
+                name: e.fileName,
+                year: e.year,
+                date: e.inProgressDate,
+                status: e.status,
+            });
+        });
+
+        return Object.values(groupedResult);
     }
 }

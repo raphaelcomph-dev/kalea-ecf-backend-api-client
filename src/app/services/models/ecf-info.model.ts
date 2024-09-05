@@ -2,13 +2,14 @@ import { Column, Entity } from "typeorm";
 import { BaseModel } from "../../shared/models/base.model";
 
 @Entity("Processing")
-export class EcfFileProcessInfoModel extends BaseModel {
+export class EcfInfoModel extends BaseModel {
     constructor(props: {
         id?: number;
         userId: number;
         state?: number;
         type: number;
         cnpj?: number;
+        companyName?: number;
         inProgressDate?: Date;
         customerId: number;
         fileName: string;
@@ -32,6 +33,12 @@ export class EcfFileProcessInfoModel extends BaseModel {
 
     @Column({ name: "Cnpj" })
     cnpj: string;
+
+    @Column({ name: "CompanyName" })
+    companyName: string;
+
+    @Column({ name: "Year" })
+    year: number;
 
     @Column({ name: "CustomerId", nullable: false })
     customerId: number;

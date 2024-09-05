@@ -1,21 +1,21 @@
 import { Injectable } from "@nestjs/common";
 import { InjectRepository } from "@nestjs/typeorm";
-import { EcfFileProcessInfoModel } from "../../models/ecf-file-processing-info.model";
+import { EcfInfoModel } from "../../models/ecf-info.model";
 import { Repository } from "typeorm";
 import { ApiContext } from "../../../shared/api-context.middleware";
 
 @Injectable()
 export class EcfFileProcessInfoRepository {
     constructor(
-        @InjectRepository(EcfFileProcessInfoModel)
-        private readonly typeormRepository: Repository<EcfFileProcessInfoModel>,
+        @InjectRepository(EcfInfoModel)
+        private readonly typeormRepository: Repository<EcfInfoModel>,
     ) {}
 
-    findAll(): Promise<EcfFileProcessInfoModel[]> {
+    findAll(): Promise<EcfInfoModel[]> {
         return this.typeormRepository.findBy({ userId: ApiContext.getContext().userId });
     }
 
-    findByEcfInfoId(ecfInfoId: number): Promise<EcfFileProcessInfoModel> {
+    findByEcfInfoId(ecfInfoId: number): Promise<EcfInfoModel> {
         return this.typeormRepository.findOneBy({ id: ecfInfoId, userId: ApiContext.getContext().userId });
     }
 
@@ -23,7 +23,7 @@ export class EcfFileProcessInfoRepository {
         await this.typeormRepository.delete({ id: ecfFileInfoId, userId: ApiContext.getContext().userId });
     }
 
-    async save(ecfFile: EcfFileProcessInfoModel): Promise<void> {
+    async save(ecfFile: EcfInfoModel): Promise<void> {
         await this.typeormRepository.save(ecfFile);
     }
 }

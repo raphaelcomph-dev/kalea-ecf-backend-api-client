@@ -1,6 +1,6 @@
 import { Column, Entity, JoinColumn, OneToOne } from "typeorm";
 import { BaseModel } from "../../shared/models/base.model";
-import { EcfFileProcessInfoModel } from "./ecf-file-processing-info.model";
+import { EcfInfoModel } from "./ecf-info.model";
 
 @Entity("ProcessingFile")
 export class EcfFileModel extends BaseModel {
@@ -15,7 +15,7 @@ export class EcfFileModel extends BaseModel {
     @Column({ name: "Pdf", nullable: true, type: "varbinary", length: "max" })
     fileBuffer: Buffer;
 
-    @OneToOne(() => EcfFileProcessInfoModel)
+    @OneToOne(() => EcfInfoModel)
     @JoinColumn({ name: "ProcessingId" })
-    processingInfo: EcfFileProcessInfoModel;
+    processingInfo: EcfInfoModel;
 }

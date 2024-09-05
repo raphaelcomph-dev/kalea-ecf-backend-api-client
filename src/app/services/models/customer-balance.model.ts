@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, ManyToOne, OneToOne } from "typeorm";
 import { BaseModel } from "../../shared/models/base.model";
 import { CustomerModel } from "../../modules/auth/services/models/customer.model";
 import { BalanceIndicatorModel } from "./balance-indicator.model";
-import { EcfFileProcessInfoModel } from "./ecf-file-processing-info.model";
+import { EcfInfoModel } from "./ecf-info.model";
 
 @Entity("CustomerBalance")
 export class CustomerBalanceModel extends BaseModel {
@@ -10,9 +10,9 @@ export class CustomerBalanceModel extends BaseModel {
     @JoinColumn({ name: "CustomerId" })
     customer: CustomerModel;
 
-    @OneToOne(() => EcfFileProcessInfoModel)
+    @OneToOne(() => EcfInfoModel)
     @JoinColumn({ name: "ProcessingId" })
-    ecfFileProcessInfo: EcfFileProcessInfoModel;
+    ecfFileProcessInfo: EcfInfoModel;
 
     @OneToOne(() => BalanceIndicatorModel)
     balanceIndicator: BalanceIndicatorModel;

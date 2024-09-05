@@ -1,7 +1,7 @@
 import { ApiContext } from "../../shared/api-context.middleware";
 import { EcfFileProcessInfoRepository } from "../infra/repositories/ecf-file-processing-info.repository";
 import { EcfFileRepository } from "../infra/repositories/ecf-file.repository";
-import { EcfFileProcessInfoModel } from "../models/ecf-file-processing-info.model";
+import { EcfInfoModel } from "../models/ecf-info.model";
 import { EcfFileModel } from "../models/ecf-file.model";
 
 export class UploadEcfUseCase {
@@ -11,7 +11,7 @@ export class UploadEcfUseCase {
     ) {}
 
     async execute(file: Express.Multer.File) {
-        const processingInfo = new EcfFileProcessInfoModel({
+        const processingInfo = new EcfInfoModel({
             userId: ApiContext.getContext().userId,
             state: 0,
             type: 2,
