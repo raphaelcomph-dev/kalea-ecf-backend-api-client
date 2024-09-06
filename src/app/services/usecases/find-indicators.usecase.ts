@@ -39,9 +39,11 @@ export class FindIndicatorsUseCase {
             throw new NotFoundException("Não foi encontrado indicadores para o CNPJ informado");
         }
 
-        const indicators = balances.map((balance) => {
-            return this.mapBalanceToDto(balance);
-        });
+        const indicators = balances
+            .sort((a, b) => b.customerBalance.year - a.customerBalance.year)
+            .map((balance) => {
+                return this.mapBalanceToDto(balance);
+            });
         return indicators;
     }
 
