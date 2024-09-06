@@ -108,12 +108,34 @@ export class EcfController {
         description: "Token JWT não informado no header da requisição.",
         type: ApiErrorOutputDto,
     })
+    @ApiNotFoundResponse({
+        description: "Indicadores não encontrado.",
+        type: ApiErrorOutputDto,
+    })
     @Get("indicators/:fileInfoId")
     findEcfIndicators(@Param("fileInfoId") fileInfoId: number): Promise<EcfIndicatorsOutputDto> {
         this.logger.log(`recebendo requisição p/ buscar os indicadores do ecf: ${fileInfoId}`);
         return this.ecfService.findIndicatorsByEcfInfoId(fileInfoId);
     }
 
+    @ApiOperation({
+        description:
+            "Lista os indicadores dos 3 arquivos mais recentes (ordenados pelo ano do documento) de uma determinada empresa.",
+    })
+    @ApiOkResponse({ description: "Busca dos indicadores realizada com sucesso.", type: [EcfIndicatorsOutputDto] })
+    @ApiNotFoundResponse({
+        description: "Não foram encontrados arquivos ou indicadores para o CNPJ informado",
+        type: ApiErrorOutputDto,
+    })
+    @ApiUnauthorizedResponse({
+        description: "Token JWT não informado, inválido ou expirado no header da requisição.",
+        type: ApiErrorOutputDto,
+    })
+    @ApiInternalServerErrorResponse({
+        description:
+            "Erro interno no servidor. Por favor, entre em contato conosco para investigarmos e resolvermos o problema o mais rápido possível.",
+        type: ApiErrorOutputDto,
+    })
     @Get("company/:cnpj/indicators")
     findEcfCompanyIndicators(@Param("cnpj") cnpj: string): Promise<EcfIndicatorsOutputDto[]> {
         this.logger.log(`recebendo requisição p/ buscar os indicadores dos ecf's da empresa: ${cnpj}`);
