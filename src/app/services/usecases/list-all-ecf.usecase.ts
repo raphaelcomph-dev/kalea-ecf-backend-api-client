@@ -1,12 +1,19 @@
 import { EcfListItemOutputDto } from "../../api/rest/dtos/output/ecf-list-item.output.dto";
 import { EcfProcessInfoRepository } from "../infra/repositories/ecf-processing-info.repository";
-import { EcfFileRepository } from "../infra/repositories/ecf-file.repository";
 
 export class ListAllEcfUsecase {
     constructor(private readonly ecfFileProcessInfoRepository: EcfProcessInfoRepository) {}
 
     async execute(): Promise<EcfListItemOutputDto[]> {
-        const ecfList = await this.ecfFileProcessInfoRepository.findAll();
+        const ecfList = (await this.ecfFileProcessInfoRepository.findAll()).sort((a, b) => {
+            if (!a.processedDate) {
+                return -1;
+            } else if (!b.processedDate) {
+                return 1;
+            } else {
+                return a.processedDate.getTime() - b.processedDate.getTime();
+            }
+        });
 
         if (!ecfList) {
             return [];

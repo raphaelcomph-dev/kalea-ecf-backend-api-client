@@ -46,6 +46,9 @@ export class EcfInfoModel extends BaseModel {
     @Column({ name: "InProgressDate" })
     inProgressDate: Date;
 
+    @Column({ name: "ProcessedDate" })
+    processedDate: Date;
+
     @Column({ name: "FileName" })
     fileName: string;
 
