@@ -11,7 +11,7 @@ export class ListAllEcfUsecase {
             } else if (!b.processedDate) {
                 return 1;
             } else {
-                return a.processedDate.getTime() - b.processedDate.getTime();
+                return b.processedDate.getTime() - a.processedDate.getTime();
             }
         });
 
