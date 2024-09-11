@@ -1,0 +1,11 @@
+# Firebase PROD
+@base_url =  https://us-central1-kalea-cred.cloudfunctions.net/kalea_ecf_backend_api_client-prod
+# Firebase QA
+# @base_url =  https://us-central1-kalea-cred.cloudfunctions.net/kalea_ecf_backend_api_client-qa
+# Local
+# @base_url = http://localhost:6251
+
+PATCH {{base_url}}/api/notify/ecf/80/status
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsImN1c3RvbWVySWQiOjMsIm5hbWUiOiJSb2JlcnRvIiwiZW1haWwiOiJyb2JlcnRvLnNpbHZhQGthbGVhY3JlZC5jb20iLCJpYXQiOjE3MjU5MTIwOTgsImV4cCI6MTcyODUwNDA5OH0.-15r6T5MZcwq-7cP3zTQFHmMhBiUKi5XPkn6mzVbiFo
+
+###x

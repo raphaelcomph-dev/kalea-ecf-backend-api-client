@@ -24,7 +24,7 @@ export class NotificationService {
 
         file = file.replaceAll("{{user.name}}", dto.name);
         file = file.replaceAll("{{user.password}}", dto.newPassword);
-        file = file.replaceAll("{{portal.paths.login}}", AppSettings.env.PORTAL.PATHS.LOGIN());
+        file = file.replaceAll("{{portal.paths.login}}", AppSettings.env.FRONTEND.PATHS.LOGIN());
 
         const msg = {
             to: dto.email,

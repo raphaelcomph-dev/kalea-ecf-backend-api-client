@@ -28,10 +28,10 @@ export class AppSettings {
                 API_KEY: (): string => process.env.MAILSEND_API_KEY,
             },
         },
-        PORTAL: {
-            BASE_URL: (): string => process.env.PORTAL_BASE_URL,
+        FRONTEND: {
+            BASE_URL: (): string => process.env.FRONTEND_BASE_URL || "http://localhost:4200",
             PATHS: {
-                LOGIN: (): string => `${process.env.PORTAL_BASE_URL}${process.env.PORTAL_PATHS_LOGIN}`,
+                LOGIN: (): string => `${process.env.FRONTEND_BASE_URL}${process.env.FRONTEND_PATHS_LOGIN}`,
             },
         },
     };
