@@ -19,9 +19,7 @@ export class DeleteEcfUseCase {
         const ecfFileInfoId = ecfFileInfo.id;
 
         await this.ecfFileRepository.deleteByFileInfoId(ecfFileInfoId);
-        await this.ecfFileProcessInfoRepository.delete(ecfFileInfoId);
         await this.balanceRepository.deleteBalanceAndIndicatorsByFileInfoId(ecfInfoId);
-
-        // TODO: validar que ECF pertence ao usuário
+        await this.ecfFileProcessInfoRepository.delete(ecfFileInfoId);
     }
 }

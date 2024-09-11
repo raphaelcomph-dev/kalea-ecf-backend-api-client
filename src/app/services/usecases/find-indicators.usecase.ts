@@ -41,7 +41,7 @@ export class FindIndicatorsUseCase {
 
         const indicators = balances
             .sort((a, b) => b.customerBalance.year - a.customerBalance.year)
-            .slice(0, 2)
+            .slice(0, 3)
             .map((balance) => {
                 return this.mapBalanceToDto(balance);
             });

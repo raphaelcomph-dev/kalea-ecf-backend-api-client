@@ -1,3 +1,5 @@
+import { NotifyController } from "./api/rest/notify.controller";
+import { EcfStatusChangedGateway } from "./api/websocket/ecf-status-changed.gateway";
 import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
 import { TerminusModule } from "@nestjs/terminus";
@@ -42,6 +44,8 @@ import "./shared/extensions/string.extension";
                     database: AppSettings.env.DATABASE.MSSQL.DB_NAME(),
                     options: {
                         encrypt: false, // MSSQL-specific option
+                        connectTimeout: 30000,
+                        cancelTimeout: 15000,
                     },
                     entities: [
                         BalanceIndicatorModel,
@@ -58,8 +62,9 @@ import "./shared/extensions/string.extension";
 
         TypeOrmModule.forFeature([BalanceIndicatorModel, CustomerBalanceModel, EcfInfoModel, EcfFileModel]),
     ],
-    controllers: [EcfController, HealthController],
+    controllers: [NotifyController, EcfController, HealthController],
     providers: [
+        EcfStatusChangedGateway,
         ApiContext,
         AuthGuard,
         {
