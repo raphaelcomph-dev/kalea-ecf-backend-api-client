@@ -19,8 +19,11 @@ export class EcfIndicatorsOutputDto {
     @ApiProperty({ example: 21298143.07, format: "Moeda: BRL" })
     dividasBancariasLiquida: number;
 
-    @ApiProperty({ example: 291634847.49, format: "Moeda: BRL" })
+    @ApiProperty({ example: 503864858.25, format: "Moeda: BRL" })
     receitaOperacionalLiquida: number;
+
+    @ApiProperty({ example: 291634847.49, format: "Moeda: BRL" })
+    receitaOperacionalBruta: number;
 
     @ApiProperty({ example: 33753698.4, format: "Moeda: BRL" })
     lucroOperacional: number;

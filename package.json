@@ -1,6 +1,6 @@
 {
     "name": "kalea-ecf-backend-api-client",
-    "version": "2.2.2",
+    "version": "2.2.7",
     "description": "",
     "author": "Raphael Soares <raphael@comph.dev> (http://raphael.comph.dev/)",
     "private": true,
@@ -29,6 +29,7 @@
         "fb:serve": "npm run build && firebase emulators:start --only functions",
         "fb:shell": "npm run build && firebase functions:shell",
         "fb:start": "npm run shell",
+        "gcloud:deploy": "gcloud run deploy",
         "fb:deploy:all": "firebase deploy --only functions:kalea_ecf_backend_api_client",
         "fb:deploy:qa": "firebase deploy --only functions:kalea_ecf_backend_api_client.qa",
         "fb:deploy:prod": "firebase deploy --only functions:kalea_ecf_backend_api_client.prod",

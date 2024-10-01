@@ -5,7 +5,7 @@ import { EcfStatusChangedGateway } from "../websocket/ecf-status-changed.gateway
 export class NotifyController {
     constructor(private readonly ecfStatusChangedGateway: EcfStatusChangedGateway) {}
 
-    @Patch("ecf/:ecfId/status")
+    @Post("ecf/:ecfId/status")
     notifyEcfStatusChanged(@Param("ecfId") ecfId: number): void {
         console.log(`Notifying ecf ${ecfId} status changed...`);
         this.ecfStatusChangedGateway.sendRefreshMessage(ecfId);

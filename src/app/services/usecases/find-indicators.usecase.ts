@@ -56,6 +56,7 @@ export class FindIndicatorsUseCase {
             ativoTotal: balance.ativoTotal,
             patrimonioLiquido: balance.patrimonioLiquido,
             dividasBancariasLiquida: balance.dividasBancariasLiquida,
+            receitaOperacionalBruta: balance.receitaOperacionalBruta,
             receitaOperacionalLiquida: balance.receitaOperacionalLiquida,
             lucroOperacional: balance.lucroOperacional,
             lucroLiquido: balance.lucroLiquido,

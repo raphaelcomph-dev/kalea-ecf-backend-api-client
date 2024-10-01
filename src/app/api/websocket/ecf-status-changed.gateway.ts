@@ -1,21 +1,17 @@
 import {
-    MessageBody,
-    SubscribeMessage,
     WebSocketGateway,
-    WebSocketServer,
     OnGatewayConnection,
     OnGatewayDisconnect,
     OnGatewayInit,
+    WebSocketServer,
+    SubscribeMessage,
+    MessageBody,
 } from "@nestjs/websockets";
-import { Server } from "socket.io";
+import { Server } from "http";
 import { AppSettings } from "../../app.settings";
 
 @WebSocketGateway({
-    cors: {
-        origin: AppSettings.env.FRONTEND.BASE_URL(),
-        methods: ["GET", "POST"],
-        credentials: true,
-    },
+    cors: true,
 })
 export class EcfStatusChangedGateway implements OnGatewayConnection, OnGatewayDisconnect, OnGatewayInit {
     @WebSocketServer()

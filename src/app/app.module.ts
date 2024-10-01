@@ -1,11 +1,11 @@
-import { NotifyController } from "./api/rest/notify.controller";
-import { EcfStatusChangedGateway } from "./api/websocket/ecf-status-changed.gateway";
 import { MiddlewareConsumer, Module } from "@nestjs/common";
 import { ConfigModule } from "@nestjs/config";
+import { APP_GUARD } from "@nestjs/core";
 import { TerminusModule } from "@nestjs/terminus";
 import { TypeOrmModule } from "@nestjs/typeorm";
 import { EcfController } from "./api/rest/ecf.controller";
 import { HealthController } from "./api/rest/health.controller";
+import { NotifyController } from "./api/rest/notify.controller";
 import { AppSettings } from "./app.settings";
 import { AuthModule } from "./modules/auth/auth.module";
 import { CustomerUserModel } from "./modules/auth/services/models/customer-user.model";
@@ -14,18 +14,18 @@ import { UserModel } from "./modules/auth/services/models/user.model";
 import { NotificationModule } from "./modules/notification/notification.module";
 import { EcfService } from "./services/ecf.service";
 import { BalanceRepository } from "./services/infra/repositories/balance.repository";
-import { EcfProcessInfoRepository } from "./services/infra/repositories/ecf-processing-info.repository";
 import { EcfFileRepository } from "./services/infra/repositories/ecf-file.repository";
+import { EcfProcessInfoRepository } from "./services/infra/repositories/ecf-processing-info.repository";
 import { BalanceIndicatorModel } from "./services/models/balance-indicator.model";
 import { CustomerBalanceModel } from "./services/models/customer-balance.model";
-import { EcfInfoModel } from "./services/models/ecf-info.model";
 import { EcfFileModel } from "./services/models/ecf-file.model";
+import { EcfInfoModel } from "./services/models/ecf-info.model";
 import { ApiContext } from "./shared/api-context.middleware";
-import { APP_GUARD } from "@nestjs/core";
 import { AuthGuard } from "./shared/auth.guard";
 
 import "./shared/extensions/number.extension";
 import "./shared/extensions/string.extension";
+import { EcfStatusChangedGateway } from "./api/websocket/ecf-status-changed.gateway";
 
 @Module({
     imports: [
@@ -44,9 +44,12 @@ import "./shared/extensions/string.extension";
                     database: AppSettings.env.DATABASE.MSSQL.DB_NAME(),
                     options: {
                         encrypt: false, // MSSQL-specific option
-                        connectTimeout: 30000,
-                        cancelTimeout: 15000,
+                        connectTimeout: 90000,
+                        cancelTimeout: 180000,
+
+                        abortTransactionOnError: true,
                     },
+                    requestTimeout: 300000,
                     entities: [
                         BalanceIndicatorModel,
                         CustomerBalanceModel,

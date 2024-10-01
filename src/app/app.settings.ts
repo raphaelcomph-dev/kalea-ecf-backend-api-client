@@ -2,7 +2,7 @@ import { Constants } from "./shared/constants";
 
 export class AppSettings {
     public static env = {
-        PORT: (): number => parseInt(process.env.APP_PORT) || 3000,
+        PORT: (): number => parseInt(process.env.APP_PORT) || 8080,
         NODE_ENV: (): string => process.env.NODE_ENV,
         JWT: {
             ACCESS_TOKEN: {

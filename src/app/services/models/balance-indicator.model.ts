@@ -17,6 +17,9 @@ export class BalanceIndicatorModel extends BaseModel {
     @Column({ name: "DividasBancariasLiquida", type: "decimal" })
     dividasBancariasLiquida: number;
 
+    @Column({ name: "ReceitaOperacionalBruta", type: "decimal" })
+    receitaOperacionalBruta: number;
+
     @Column({ name: "ReceitaOperacionalLiquida", type: "decimal" })
     receitaOperacionalLiquida: number;
 
