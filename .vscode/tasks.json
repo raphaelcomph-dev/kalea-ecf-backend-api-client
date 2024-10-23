@@ -6,7 +6,7 @@
         {
             "label": "gcloud deploy",
             "type": "shell",
-            "command": "gcloud run deploy kalea-ecf-backend-api-client --region us-central1 --source .",
+            "command": "gcloud run deploy kalea-ecf-backend-api-client --region us-central1 --project=kalea-cred --allow-unauthenticated --source .",
             "problemMatcher": []
         }
     ]
